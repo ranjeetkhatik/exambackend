@@ -18,6 +18,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User user, Set<UserRole> userRoles) throws Exception {
 
+        System.out.println("u are in create user method of UserServiceImpl...");
+
        User local= this.userRepository.findByUsername(user.getUsername());
        if (local!=null){
            System.out.println("User is Already Exists");
@@ -31,5 +33,16 @@ public class UserServiceImpl implements UserService {
           local= this.userRepository.save(user);
        }
         return local;
+    }
+            //getting user by username
+    @Override
+    public User getUser(String username) {
+        return this.userRepository.findByUsername(username);
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+    this.userRepository.deleteById(userId);
+
     }
 }
